@@ -25,16 +25,27 @@ public class RandomReadingActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            int pos = (int)Math.random()*stringList.size();
-            mResultText.setText(pos+"."+stringList.get(pos));
-            try {
-                Thread.sleep(Integer.parseInt(mSpeed.toString())*1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            while (true) {
+                try {
+                    int speedValue = Integer.parseInt(mSpeed.getText().toString());
+                    Thread.sleep(speedValue * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        int pos = (int) (Math.random() * stringList.size());
+                        mResultText.setText(pos + "." + stringList.get(pos));
+
+
+                    }
+                });
+
             }
+
         }
-
-
     }
 
     @Override
@@ -48,13 +59,12 @@ public class RandomReadingActivity extends AppCompatActivity {
         thread.setDaemon(true);
         thread.start();
 
-
     }
 
 
     public void onSpeedUpButtonClick(View view) {
         int speedValue = Integer.parseInt(mSpeed.getText().toString());
-        if (speedValue>1) {
+        if (speedValue > 1) {
             speedValue--;
             mSpeed.setText(Integer.toString(speedValue));
         }
@@ -67,13 +77,13 @@ public class RandomReadingActivity extends AppCompatActivity {
         mSpeed.setText(Integer.toString(speedValue));
     }
 
-        public void fillStringList() {
-            stringList = StandartReadingActivity.readFromFileExternalStorage();
-
-        }
-
+    public void fillStringList() {
+        stringList = StandartReadingActivity.readFromFileExternalStorage();
 
     }
+
+
+}
 
 
 

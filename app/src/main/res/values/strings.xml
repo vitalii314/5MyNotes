@@ -5,4 +5,7 @@
     <string name="random_reading">Random Reading</string>
     <string name="add_to_file">Add  Phrase</string>
     <string name="speed">speed</string>
+    <string name="delete_phrase">delete phrase №</string>
+    <string name="password">ENTER YOUR PASSWORD</string>
+    <string name="submit">submit</string>
 </resources>

@@ -42,8 +42,8 @@ public class Encrypter {
     }
     
 
-    public static void writeEncryptedBytesToFile(List<byte[]> bytesArray, File file) throws Exception {
-        FileOutputStream fos = new FileOutputStream(file, true);
+    public static void writeEncryptedBytesToFile(List<byte[]> bytesArray, File file, boolean append) throws Exception {
+        FileOutputStream fos = new FileOutputStream(file, append);
         for (byte[] bytes: bytesArray) {
             fos.write(encrypt(bytes,"mynoteskey"));
         }
