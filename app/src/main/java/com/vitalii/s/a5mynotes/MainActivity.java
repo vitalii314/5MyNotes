@@ -1,23 +1,21 @@
 package com.vitalii.s.a5mynotes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -34,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private final String LOG_TAG = "myLogs";
     private Button mButtonWrite;
     private Button mButtonRead;
+    private ScrollView mResultScrollView;
 
 
     @Override
@@ -43,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         mResultText = (TextView) findViewById(R.id.resultText);
         mAddText = (EditText) findViewById(R.id.editText);
         mButtonWrite = (Button) findViewById(R.id.buttonWriteToFile);
-        mButtonRead = (Button) findViewById(R.id.buttonReadFromFile);
+        mButtonRead = (Button) findViewById(R.id.buttonStandartReading);
+        mResultScrollView = (ScrollView) findViewById(R.id.resultScrollView);
     }
 
 
@@ -54,7 +54,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onReadButtonClick(View view) {
-        readFromFileExternalStorage();
+        Intent intent = new Intent(MainActivity.this, StandartReadingActivity.class);
+        startActivity(intent);
+        //readFromFileExternalStorage();
+    }
+
+    public void onRandomReadButtonClick(View view) {
+        Intent intent = new Intent(MainActivity.this, RandomReadingActivity.class);
+        startActivity(intent);
     }
 
 
@@ -177,4 +184,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return stringList;
     }
+
+
+
 }

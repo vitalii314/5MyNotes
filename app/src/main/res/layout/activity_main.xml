@@ -13,21 +13,22 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WriteToFile"
+        android:text="@string/add_to_file"
         android:id="@+id/buttonWriteToFile"
-        android:layout_above="@+id/buttonReadFromFile"
+        android:layout_above="@+id/buttonStandartReading"
         android:onClick="onButtonWriteClick"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ReadFromFile"
-        android:id="@+id/buttonReadFromFile"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:text="@string/standart_reading"
+        android:id="@+id/buttonStandartReading"
         android:onClick="onReadButtonClick"
-        android:layout_marginBottom="48dp" />
+        android:layout_marginBottom="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/resultText"
+        android:layout_toStartOf="@+id/resultText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,8 +46,20 @@
         android:id="@+id/editText"
         android:layout_above="@+id/buttonWriteToFile"
         android:layout_centerHorizontal="true"
-        android:hint="Add something"
+        android:hint="Add phrase"
         android:layout_marginBottom="36dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_reading"
+        android:id="@+id/buttonRandomReading"
+        android:layout_alignTop="@+id/buttonStandartReading"
+        android:layout_toRightOf="@+id/resultText"
+        android:layout_toEndOf="@+id/resultText"
+        android:onClick="onRandomReadButtonClick"
+        android:elegantTextHeight="false" />
+
 
 </RelativeLayout>
 

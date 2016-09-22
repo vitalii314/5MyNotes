@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">5MyNotes</string>
     <string name="empty" />
+    <string name="standart_reading">Standart Reading</string>
+    <string name="random_reading">Random Reading</string>
+    <string name="add_to_file">Add  Phrase</string>
+    <string name="speed">speed</string>
 </resources>
