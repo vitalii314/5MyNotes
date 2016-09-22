@@ -1,7 +1,9 @@
 package com.vitalii.s.a5mynotes;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.security.Key;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -40,8 +42,8 @@ public class Encrypter {
     }
     
 
-    public static void writeEncryptedBytesToFile(List<byte[]> bytesArray, String fileName) throws Exception {
-        FileOutputStream fos = new FileOutputStream(fileName);
+    public static void writeEncryptedBytesToFile(List<byte[]> bytesArray, File file) throws Exception {
+        FileOutputStream fos = new FileOutputStream(file, true);
         for (byte[] bytes: bytesArray) {
             fos.write(encrypt(bytes,"mynoteskey"));
         }
@@ -50,15 +52,16 @@ public class Encrypter {
 
     }
 
-    public static byte[]  readDecryptedBytesFromFile(String fileName) throws Exception {
-        FileInputStream fis = new FileInputStream(fileName);
+    public static byte[]  readDecryptedBytesFromFile(File file) throws Exception {
+        InputStream fis = new FileInputStream((file));
         byte[] buffer = new byte[fis.available()];
         fis.read(buffer);
         return decrypt(buffer,"mynoteskey");
+
     }
 
-    public static List<byte[]> readDecryptedBytesList(String fileName) throws Exception {
-        byte[] bytes = readDecryptedBytesFromFile(fileName);
+    public static List<byte[]> readDecryptedBytesList(File file) throws Exception {
+        byte[] bytes = readDecryptedBytesFromFile(file);
         List<byte[]> bytesList = new ArrayList<>();
         byte[] temp = new byte[2048];
         int count = -1;
@@ -71,6 +74,27 @@ public class Encrypter {
             }
          count ++;
          temp[count] = b;
+
+
+        }
+        return bytesList;
+    }
+
+
+    //to be used with android
+    public static List<byte[]> divideBytesArrayToByteList(byte[] bytes) throws Exception {
+        List<byte[]> bytesList = new ArrayList<>();
+        byte[] temp = new byte[2048];
+        int count = -1;
+        for (byte b: bytes) {
+            if (b==64) {
+                bytesList.add(temp);
+                temp = new byte[2048];
+                count = -1;
+                continue;
+            }
+            count ++;
+            temp[count] = b;
 
 
         }

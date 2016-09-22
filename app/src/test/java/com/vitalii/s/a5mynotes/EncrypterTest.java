@@ -3,6 +3,7 @@ package com.vitalii.s.a5mynotes;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,8 @@ public class EncrypterTest {
 
     @Test
     public void generalTest() throws Exception {
-        Encrypter.writeEncryptedBytesToFile(bytesList,fileName);
-        List<byte[]> resultBytesList = Encrypter.readDecryptedBytesList(fileName);
+        Encrypter.writeEncryptedBytesToFile(bytesList,new File(fileName));
+        List<byte[]> resultBytesList = Encrypter.readDecryptedBytesList(new File(fileName));
         List<String> stringList = new ArrayList<>();
         stringList = getStringListFromBytesList(resultBytesList);
         StringBuilder sb = new StringBuilder();
@@ -68,6 +69,7 @@ public class EncrypterTest {
         }
         System.out.println("******************");
         List<String> listResultString = new ArrayList<>();
+        //string.trim() should be used instead :-))))
         for (byte[] b: resultBytesList) {
             String s = new String(b,"UTF-8");
             //deleting spaces at the end
