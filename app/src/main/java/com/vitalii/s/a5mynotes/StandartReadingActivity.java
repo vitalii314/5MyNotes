@@ -43,8 +43,9 @@ public class StandartReadingActivity extends AppCompatActivity {
             stringList = getStringListFromBytesList(byteList);
             StringBuilder sb = new StringBuilder();
             for (int i =0; i<stringList.size(); i++) {
-                sb.append(i).append(".");
+                sb.append(i).append(". ");
                 sb.append(stringList.get(i));
+                sb.append("\n");
                 sb.append("\n");
             }
 

@@ -22,9 +22,11 @@ public class RandomReadingActivity extends AppCompatActivity {
 
 
     public class MyThread implements Runnable {
-
+        int pos;
+        int curPos;
         @Override
         public void run() {
+
             while (true) {
                 try {
                     int speedValue = Integer.parseInt(mSpeed.getText().toString());
@@ -35,11 +37,11 @@ public class RandomReadingActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-                        int pos = (int) (Math.random() * stringList.size());
-                        mResultText.setText(pos + "." + stringList.get(pos));
-
-
+                        do {
+                             pos = (int) (Math.random() * stringList.size());
+                        } while (pos==curPos);
+                        mResultText.setText(pos + ". " + stringList.get(pos));
+                        curPos=pos;
                     }
                 });
 
