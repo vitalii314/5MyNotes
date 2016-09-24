@@ -23,7 +23,9 @@ public class RandomReadingActivity extends AppCompatActivity {
 
     public class MyThread implements Runnable {
         int pos;
-        int curPos;
+        List<Integer> tempPosList = new ArrayList<>();
+
+
         @Override
         public void run() {
 
@@ -38,15 +40,25 @@ public class RandomReadingActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         do {
-                             pos = (int) (Math.random() * stringList.size());
-                        } while (pos==curPos);
+                            pos = (int) (Math.random() * stringList.size());
+                        } while (wasAlready(pos));
                         mResultText.setText(pos + ". " + stringList.get(pos));
-                        curPos=pos;
                     }
                 });
 
             }
 
+        }
+
+        public boolean wasAlready(int pos) {
+
+            for (int i = 0; i < tempPosList.size(); i++) {
+                if (tempPosList.get(i) == pos) return true;
+            }
+
+            tempPosList.add(pos);
+            if (tempPosList.size() == stringList.size()) tempPosList.clear();
+            return false;
         }
     }
 
